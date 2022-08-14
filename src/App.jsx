@@ -14,7 +14,7 @@ const App = () => {
   const [todaysSells, setTodaysSells] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/product/allproducts")
+    fetch("https://sellsrecord.herokuapp.com/product/allproducts")
       .then((res) => res.json())
       .then((productsArray) => {
         const newAllProductState = productsArray.map((product) => ({
@@ -28,7 +28,7 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:5000/product/topproducts")
+    fetch("https://sellsrecord.herokuapp.com/product/topproducts")
       .then((res) => res.json())
       .then((productsArray) => {
         const topSell = productsArray.map((product) => ({
@@ -41,7 +41,7 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:5000/product/todayssell")
+    fetch("https://sellsrecord.herokuapp.com/product/todayssell")
       .then((res) => res.json())
       .then((productsArray) => {
         const todaySell = productsArray.map((product) => ({
@@ -99,7 +99,7 @@ const App = () => {
             {hasTodaysSells ? (
               <ProductsToday products={todaysSells} />
             ) : (
-              <Spinner animation="border" />
+              "No Record for today"
             )}
           </Col>
         </Row>
