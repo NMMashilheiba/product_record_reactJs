@@ -108,7 +108,6 @@ const App = () => {
       <div className="all-margin ">
         <Row>
           <Col className="bg-col">
-            <h2>Enter New Record</h2>
             <EnterRecord />
           </Col>
           <Col className="bg-col">

@@ -1,61 +1,51 @@
-import Button from "react-bootstrap/Button";
-import Col from "react-bootstrap/Col";
-import Form from "react-bootstrap/Form";
-import Row from "react-bootstrap/Row";
-
+import { useState } from "react";
+import "./style.css";
 function EntryForm() {
+  const [name, setname] = useState("");
+  const [quantity, setquantity] = useState("");
+  const [amount, setamount] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const record = { name, quantity, amount };
+    console.log(record);
+    fetch("https://sellsrecord.herokuapp.com/product/create/record", {
+      method: "POST",
+      header: { "Content-type": "application/json" },
+      body: JSON.stringify(record),
+    }).then(() => {
+      console.log("new record added");
+    });
+  };
+
   return (
-    <Form>
-      <Row className="mb-3">
-        <Form.Group as={Col} controlId="formGridEmail">
-          <Form.Label>Email</Form.Label>
-          <Form.Control type="email" placeholder="Enter email" />
-        </Form.Group>
-
-        <Form.Group as={Col} controlId="formGridPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" />
-        </Form.Group>
-      </Row>
-
-      <Form.Group className="mb-3" controlId="formGridAddress1">
-        <Form.Label>Address</Form.Label>
-        <Form.Control placeholder="1234 Main St" />
-      </Form.Group>
-
-      <Form.Group className="mb-3" controlId="formGridAddress2">
-        <Form.Label>Address 2</Form.Label>
-        <Form.Control placeholder="Apartment, studio, or floor" />
-      </Form.Group>
-
-      <Row className="mb-3">
-        <Form.Group as={Col} controlId="formGridCity">
-          <Form.Label>City</Form.Label>
-          <Form.Control />
-        </Form.Group>
-
-        <Form.Group as={Col} controlId="formGridState">
-          <Form.Label>State</Form.Label>
-          <Form.Select defaultValue="Choose...">
-            <option>Choose...</option>
-            <option>...</option>
-          </Form.Select>
-        </Form.Group>
-
-        <Form.Group as={Col} controlId="formGridZip">
-          <Form.Label>Zip</Form.Label>
-          <Form.Control />
-        </Form.Group>
-      </Row>
-
-      <Form.Group className="mb-3" id="formGridCheckbox">
-        <Form.Check type="checkbox" label="Check me out" />
-      </Form.Group>
-
-      <Button variant="primary" type="submit">
-        Submit
-      </Button>
-    </Form>
+    <div className="create">
+      <h2>Add new record</h2>
+      <form onSubmit={handleSubmit}>
+        <label>Product name</label>
+        <input
+          type="text"
+          required
+          value={name}
+          onChange={(e) => setname(e.target.value)}
+        />
+        <label>Product quantity</label>
+        <input
+          type="number"
+          required
+          value={quantity}
+          onChange={(e) => setquantity(e.target.value)}
+        />
+        <label>Total amount</label>
+        <input
+          type="number"
+          required
+          value={amount}
+          onChange={(e) => setamount(e.target.value)}
+        />
+        <button>Enter record</button>
+      </form>
+    </div>
   );
 }
 
