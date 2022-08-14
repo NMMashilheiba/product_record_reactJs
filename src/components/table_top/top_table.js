@@ -19,6 +19,7 @@ const ProductsTop = (props) => {
       <thead>
         <tr>
           <th>Product Name</th>
+          <th>Quantity</th>
         </tr>
       </thead>
       <tbody>{props.products.map(renderProduct)}</tbody>

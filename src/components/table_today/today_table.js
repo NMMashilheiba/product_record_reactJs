@@ -17,7 +17,7 @@ const ProductsToday = (props) => {
   };
   var todaystotalRev = 0;
   props.products.map((product) => {
-    return (todaystotalRev += product.amount);
+    return (todaystotalRev += parseInt(product.amount));
   });
 
   return (
